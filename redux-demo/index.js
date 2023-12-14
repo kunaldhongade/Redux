@@ -39,10 +39,10 @@ const CAKE_ORDERED = "CAKE_ORDERED" // action string constant
 
 // action with type property
 
-{
-    type: CAKE_ORDERED,
-        quantity: 1,
-}
+// {
+//     type: CAKE_ORDERED,
+//         quantity: 1,
+// }
 
 // action creator create an action a function with action  type property
 // a function that return action
@@ -108,3 +108,53 @@ const reducer = (state = initialState, action) => {
 
 // provides a third party extension point between dispatching an action, and the moment it reaches the reducer
 // use middleware for logging, crash reporting, performing asynchronous tasks etc.
+
+
+// actions 
+
+// synchronous actions
+// as soon as an action was dispatched, the state was immediately updated.
+// if you dispatch the CAKE_ORDERED action, the numOfCakes was right away decremented by 1.
+// same with ICECREAM_ORDERED action as well
+
+
+// async actions
+// Asynchronous API calls to fetch data from an end point and use that data in your application
+// our application fetches a list of users from an api end point and stores it in the redux store.
+// state? look like
+// action? different
+// Reducer? works
+
+// state of application
+
+// first typically data fetching three property of state object
+// 1. loading : true
+// 2. data : []
+// 3. error: ''
+
+// loading - -Display a loading spinner in your component
+// data - list of users
+// error - display error to the user
+
+// Actions
+// three actions 
+// 1. describe list of users requested using api endpoint
+//          FETCH_USERS_REQUESTED - fetch list users
+// 2. second and third dependent on first one
+//          FETCH_USERS_SUCCEEDED - fetched successfully
+// 3. FETCH_USERS_FAILED - failed
+
+
+// Reducers
+
+// case FETCH_USERS_REQUESTED
+// loading : true
+
+// case FETCH_USERS_SUCCEEDED
+// loading : false
+// users: data{from api}
+
+
+// FETCH_USERS_FAILED
+// loading: false
+// error: error(from api)
