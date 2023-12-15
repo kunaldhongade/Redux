@@ -88,6 +88,11 @@ const icecreamReducer = (state = initialIcecreamState, action) => {
                 ...state,
                 numOfIcecream: state.numOfIcecream + action.payload
             }
+        case CAKE_ORDERED: // each reducer can update only its portion of application state however it can respond to any action dispatch in application
+            return {
+                ...state,
+                numOfIcecream: state.numOfIcecream - 1
+            }
 
         default:
             return state
@@ -130,14 +135,17 @@ const rootReducer = combineReducers({
 })
 
 
-const store = createStore(rootReducer, applyMiddleware(logger))
+// const store = createStore(rootReducer, applyMiddleware(logger))
+const store = createStore(rootReducer)
 
 // redux store holding application state
 
 console.log('initial State', store.getState())
 
 
-const unsubscribe = store.subscribe(() => { })
+const unsubscribe = store.subscribe(() => {
+    console.log("updated state", store.getState())
+})
 
 
 // store gives dispatch method to update state

@@ -78,4 +78,4 @@ const unsubscribe = store.subscribe(() => {
 });
 
 store.dispatch(fetchUsers());
-unsubscribe();
+// unsubscribe();

@@ -140,4 +140,4 @@ const store = createStore(reducer, applyMiddleware(thunkMiddleware))
 
 const unsubscribe = store.subscribe(() => { console.log(store.getState()) })
 store.dispatch(fetchUsers())
-unsubscribe()
+// unsubscribe()
