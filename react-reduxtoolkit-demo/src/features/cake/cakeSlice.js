@@ -1,4 +1,4 @@
-const createSlice = require('@reduxjs/toolkit').createSlice
+import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     numOfCakes: 10,
@@ -24,8 +24,8 @@ const cakeSlice = createSlice({ // create slice uses under the hood immer librar
 
 // it also return main reducer function to redux store
 
-module.exports = cakeSlice.reducer
-module.exports.cakeActions = cakeSlice.actions
+export default cakeSlice.reducer
+export const { ordered, restocked } = cakeSlice.actions
 
 // this slice takes care of defining action type constant and action object and action creator switch statement in reducer and handling immutable update in reducer!
 

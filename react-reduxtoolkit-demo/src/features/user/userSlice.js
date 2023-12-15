@@ -1,6 +1,5 @@
-const createSlice = require('@reduxjs/toolkit').createSlice
-const createAsyncThunk = require('@reduxjs/toolkit').createAsyncThunk
-const axios = require('axios')
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import axios from 'axios'
 
 
 const initialState = {
@@ -10,15 +9,10 @@ const initialState = {
 }
 
 // Generate pending, fulfilled and rejected action type
-
-const fetchUsers = createAsyncThunk('user/fetchUsers', () => {
-    return axios
+export const fetchUsers = createAsyncThunk('user/fetchUsers', async () => { // created async thunk dispaches lifecycle methods of promise as actions
+    const response = await axios
         .get('https://jsonplaceholder.typicode.com/users')
-        .then(response => {
-            return response.data.map((user) => {
-                return user.id
-            })
-        })
+    return response.data
 })
 
 // we have successfully handle redux toolkit
@@ -29,12 +23,17 @@ const userSlice = createSlice({
     name: "user",
     initialState,
     extraReducers: builder => { // using builder we can add cases to promise life cycle methods
-        builder.addCase(fetchUsers.pending, state => { state.loading = true });
+
+        builder.addCase(fetchUsers.pending, state => {
+            state.loading = true
+        });
+
         builder.addCase(fetchUsers.fulfilled, (state, action) => {
             state.loading = false
             state.users = action.payload
             state.error = ""
         })
+
         builder.addCase(fetchUsers.rejected, (state, action) => {
             state.loading = false
             state.users = []
@@ -43,5 +42,5 @@ const userSlice = createSlice({
     }
 })
 
-module.exports = userSlice.reducer
-module.exports.fetchUsers = fetchUsers
+// export default userSlice.reducer
+export default userSlice.reducer;
