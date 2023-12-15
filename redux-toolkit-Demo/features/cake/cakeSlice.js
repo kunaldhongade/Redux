@@ -17,8 +17,8 @@ const cakeSlice = createSlice({ // create slice uses under the hood immer librar
             state.numOfCakes--
         },
         restocked: (state, action) => {
-            state.numOfCakes += action.payload
-        }
+            state.numOfCakes = state.numOfCakes + action.payload
+        },
     },
 })
 
