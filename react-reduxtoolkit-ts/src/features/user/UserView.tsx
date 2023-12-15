@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 // import { useDispatch, useSelector } from 'react-redux';
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { fetchUsers } from "./userSlice";
@@ -9,7 +9,7 @@ const UserView = () => {
 
   useEffect(() => {
     dispatch(fetchUsers());
-  }, []); // we want to run effect on component mount so we add empty array dependency
+  }, [dispatch]); // we want to run effect on component mount so we add empty array dependency
   return (
     <div>
       <h2>List of Users</h2>
